@@ -21,7 +21,6 @@ Summary:        Rust's package manager and build tool
 Group:          Development/Other
 License:        ASL 2.0 or MIT
 URL:            https://crates.io/
-ExclusiveArch:  %{rust_arches}
 
 %global cargo_version %{version}
 %global cargo_bootstrap 0.16.0

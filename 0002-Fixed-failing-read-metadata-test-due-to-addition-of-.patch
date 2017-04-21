@@ -1,0 +1,25 @@
+From 776294953c64515ff16456db4cb98ce81e722278 Mon Sep 17 00:00:00 2001
+From: Robert Vally <rvally@gmail.com>
+Date: Thu, 2 Feb 2017 16:22:49 +0800
+Subject: [PATCH 2/2] Fixed failing read-metadata test due to addition of
+ description.
+
+---
+ tests/read-manifest.rs | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/tests/read-manifest.rs b/tests/read-manifest.rs
+index 7aceb454..ab29399a 100644
+--- a/tests/read-manifest.rs
++++ b/tests/read-manifest.rs
+@@ -11,6 +11,7 @@ static MANIFEST_OUTPUT: &'static str = r#"
+     "id":"foo[..]0.5.0[..](path+file://[..]/foo)",
+     "license": null,
+     "license_file": null,
++    "description": null,
+     "source":null,
+     "dependencies":[],
+     "targets":[{
+-- 
+2.11.1
+

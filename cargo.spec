@@ -3,7 +3,7 @@
 
 # Only x86_64 and i686 are Tier 1 platforms at this time.
 # https://forge.rust-lang.org/platform-support.html
-%global rust_arches x86_64 i686 armv7hl aarch64
+%global rust_arches x86_64 i586 armv7hl aarch64
 
 # Only the specified arches will use bootstrap binaries.
 %global bootstrap_arches %%{rust_arches}

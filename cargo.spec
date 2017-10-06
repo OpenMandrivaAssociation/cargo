@@ -15,7 +15,7 @@
 %endif
 
 Name:           cargo
-Version:        0.17.0
+Version:        0.21.1
 Release:        1
 Summary:        Rust's package manager and build tool
 Group:          Development/Other

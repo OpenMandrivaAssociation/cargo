@@ -168,7 +168,7 @@ export LIBGIT2_SYS_USE_PKG_CONFIG=1
 export CARGO_HOME="%{cargo_home}"
 export RUSTFLAGS="%{rustflags}"
 
-%{local_cargo} build --release
+%{local_cargo} build --verbose --release
 sh src/ci/dox.sh
 
 %install

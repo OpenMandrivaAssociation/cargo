@@ -113,11 +113,11 @@ and ensure that you'll always get a repeatable build.
 test -f '%{local_cargo}'
 %endif
 
+# vendored crates
+%setup -q -n vendor -T -b 100
+
 # cargo sources
 %setup -q -n %{name}-%{cargo_version}
-
-# vendored crates
-%setup -q -T -D -a 100
 
 # define the offline registry
 %global cargo_home $PWD/.cargo
@@ -137,6 +137,7 @@ EOF
 
 
 %build
+%setup_compile_flags
 
 %if %without bundled_libgit2
 # convince libgit2-sys to use the distro libgit2
@@ -146,12 +147,6 @@ export LIBGIT2_SYS_USE_PKG_CONFIG=1
 # use our offline registry and custom rustc flags
 export CARGO_HOME="%{cargo_home}"
 export RUSTFLAGS="%{rustflags}"
-
-# cargo no longer uses a configure script, but we still want to use
-# CFLAGS in case of the odd C file in vendored dependencies.
-%{?__global_cflags:export CFLAGS="%{__global_cflags}"}
-%{!?__global_cflags:%{?optflags:export CFLAGS="%{optflags}"}}
-%{?__global_ldflags:export LDFLAGS="%{__global_ldflags}"}
 
 %{local_cargo} build --release
 sh src/ci/dox.sh

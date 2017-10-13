@@ -15,20 +15,18 @@
 %bcond_with bundled_libgit2
 %endif
 
-Name:           cargo
-Version:        0.21.0
-Release:        1
-Summary:        Rust's package manager and build tool
-%if 0%{?mageia}
-Group:          Development/Other
-%endif
-License:        ASL 2.0 or MIT
-URL:            https://crates.io/
+Name:		cargo
+Version:	0.21.0
+Release:	1
+Summary:	Rust's package manager and build tool
+Group:		Development/Other
+License:	ASL 2.0 or MIT
+URL:		https://crates.io/
 
 %global cargo_version %{version}
 %global cargo_bootstrap 0.20.0
 
-Source0:        https://github.com/rust-lang/%{name}/archive/%{cargo_version}/%{name}-%{cargo_version}.tar.gz
+Source0:	https://github.com/rust-lang/%{name}/archive/%{cargo_version}/%{name}-%{cargo_version}.tar.gz
 
 # Get the Rust triple for any arch.
 %{lua: function rust_triple(arch)
@@ -74,35 +72,35 @@ end}
 # It's so big because some of the -sys crates include the C library source they
 # want to link to.  With our -devel buildreqs in place, they'll be used instead.
 # FIXME: These should all eventually be packaged on their own!
-Source100:      %{name}-%{version}-vendor.tar.xz
+Source100:	%{name}-%{version}-vendor.tar.xz
 
-BuildRequires:  rust
-BuildRequires:  make
-BuildRequires:  cmake
-BuildRequires:  gcc
+BuildRequires:	rust
+BuildRequires:	make
+BuildRequires:	cmake
+BuildRequires:	gcc
 
 %ifarch %{bootstrap_arches}
 %global bootstrap_root cargo-%{cargo_bootstrap}-%{rust_triple}
 %global local_cargo %{_builddir}/%{bootstrap_root}/cargo/bin/cargo
 %else
-BuildRequires:  %{name} >= 0.13.0
+BuildRequires:	%{name} >= 0.13.0
 %global local_cargo %{_bindir}/%{name}
 %endif
 
 # Indirect dependencies for vendored -sys crates above
-BuildRequires:  pkgconfig(libcurl)
-BuildRequires:  pkgconfig(libssh2)
-BuildRequires:  openssl-devel
-BuildRequires:  zlib-devel
+BuildRequires:	pkgconfig(libcurl)
+BuildRequires:	pkgconfig(libssh2)
+BuildRequires:	openssl-devel
+BuildRequires:	zlib-devel
 
 %if %with bundled_libgit2
-Provides:       bundled(libgit2) = 0.24.0
+Provides:	bundled(libgit2) = 0.24.0
 %else
-BuildRequires:  libgit2-devel >= 0.24
+BuildRequires:	libgit2-devel >= 0.24
 %endif
 
 # Cargo is not much use without Rust
-Requires:       rust
+Requires:	rust
 
 %description
 Cargo is a tool that allows Rust projects to declare their various dependencies

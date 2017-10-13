@@ -15,6 +15,9 @@
 %bcond_with bundled_libgit2
 %endif
 
+# (tpg) accordig to Rust devs a LLVM-5.0.0 is not yet supported
+%bcond_with llvm
+
 Name:		cargo
 Version:	0.21.1
 Release:	1
@@ -77,7 +80,11 @@ Source100:	%{name}-%{version}-vendor.tar.xz
 BuildRequires:	rust
 BuildRequires:	make
 BuildRequires:	cmake
+%if %{with llvm}
+BuildRequires:	llvm-devel
+%else
 BuildRequires:	gcc
+%endif
 
 %ifarch %{bootstrap_arches}
 %global bootstrap_root cargo-%{cargo_bootstrap}-%{rust_triple}
@@ -138,6 +145,17 @@ EOF
 
 %build
 %setup_compile_flags
+
+%if !%{with llvm}
+export CC=gcc
+export CXX=g++
+# for some reason parts of the code still use cc call rather than the environment
+# which results in a mixture
+mkdir omv_build_comp
+ln -s `which gcc` omv_build_comp/cc
+ln -s `which g++` omv_build_comp/g++
+export PATH=$PWD/omv_build_comp:$PATH
+%endif
 
 %if %without bundled_libgit2
 # convince libgit2-sys to use the distro libgit2

@@ -144,7 +144,9 @@ EOF
 
 
 %build
-%setup_compile_flags
+export CFLAGS="%{optflags}"
+export CXXFLAGS="%{optflags}"
+export LDFLAGS="%{ldflags}"
 
 %if !%{with llvm}
 export CC=gcc

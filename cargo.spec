@@ -16,7 +16,7 @@
 %endif
 
 Name:		cargo
-Version:	0.21.0
+Version:	0.21.1
 Release:	1
 Summary:	Rust's package manager and build tool
 Group:		Development/Other
@@ -113,11 +113,11 @@ and ensure that you'll always get a repeatable build.
 test -f '%{local_cargo}'
 %endif
 
-# vendored crates
-%setup -q -n vendor -T -b 100
-
 # cargo sources
 %setup -q -n %{name}-%{cargo_version}
+
+# vendored crates
+%setup -q -T -D -a 100
 
 # define the offline registry
 %global cargo_home $PWD/.cargo

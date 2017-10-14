@@ -77,7 +77,7 @@ end}
 # FIXME: These should all eventually be packaged on their own!
 Source100:	%{name}-%{version}-vendor.tar.xz
 
-BuildRequires:	rust
+BuildRequires:	rust >= 0.20.0
 BuildRequires:	make
 BuildRequires:	cmake
 %if %{with llvm}

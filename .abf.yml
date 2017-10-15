@@ -1,8 +1,4 @@
 sources:
-  cargo-0.16.0-aarch64-unknown-linux-gnu.tar.gz: 9dfaeafdfebf72192c1fc22fea22f8e14b093f6c
-  cargo-0.16.0-armv7-unknown-linux-gnueabihf.tar.gz: 307188d7010603a226a2ddb8a63cb321d2324629
-  cargo-0.16.0-i686-unknown-linux-gnu.tar.gz: 7ada66c88e472c079b87344622e5983266b685ef
-  cargo-0.16.0-x86_64-unknown-linux-gnu.tar.gz: bf9e82c23bd6a2c7a94ef4c12450eeb90af703a4
-  cargo-0.17.0-vendor.tar.xz: 36c721f6d72eb6661b37754e4cbb50fc8c8ab37d
-  cargo-0.17.0.tar.gz: a208a9b7d9fd2d03bb7fb572e6af83cd3127ca8d
-  rust-installer-4f994850808a572e2cc8d43f968893c8e942e9bf.tar.gz: e7b2c340ab103891a69025e13490ba9280b57810
+  cargo-0.21.1-vendor.tar.xz: 642c82d2dbe2789786088a2b08d9d65564591d61
+  cargo-0.21.1.tar.gz: d58b459ca0df35db9fc734f35f6679c53502534a
+

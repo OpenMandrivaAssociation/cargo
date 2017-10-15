@@ -194,12 +194,20 @@ install -p -m644 src/etc/_cargo \
 # Create the path for crate-devel packages
 mkdir -p %{buildroot}%{_datadir}/cargo/registry
 
+# (tpg) disable checks as it may fail due to network issue
+# warning: spurious network error (2 tries remaining): A second chained error
+# warning: spurious network error (1 tries remaining): A non-spurious wrapping err
+# warning: spurious network error (2 tries remaining): failed to get 200 response from `Uri`, got 502
+# warning: spurious network error (1 tries remaining): failed to get 200 response from `Uri`, got 501
+
+%if 0
 %check
 export CARGO_HOME="%{cargo_home}"
 export RUSTFLAGS="%{rustflags}"
 
 # some tests are known to fail exact output due to libgit2 differences
 CFG_DISABLE_CROSS_TESTS=1 %{local_cargo} test --no-fail-fast || :
+%endif
 
 %files
 %license LICENSE-APACHE LICENSE-MIT LICENSE-THIRD-PARTY

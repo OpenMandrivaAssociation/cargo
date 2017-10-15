@@ -210,7 +210,6 @@ CFG_DISABLE_CROSS_TESTS=1 %{local_cargo} test --no-fail-fast || :
 %endif
 
 %files
-%license LICENSE-APACHE LICENSE-MIT LICENSE-THIRD-PARTY
 %doc README.md
 %{_bindir}/cargo
 %{_mandir}/man1/cargo*.1*

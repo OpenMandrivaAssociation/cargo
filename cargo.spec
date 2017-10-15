@@ -2,6 +2,8 @@
 # The aim is to work with them on a rust packaging policy we could share,
 # so that we can ensure a good packaging and share the workload.
 
+%define _disable_ld_no_undefined 1
+
 # Only x86_64 and i686 are Tier 1 platforms at this time.
 # https://forge.rust-lang.org/platform-support.html
 %global rust_arches x86_64 %ix86 armv7hl aarch64

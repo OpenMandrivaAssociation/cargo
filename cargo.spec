@@ -12,7 +12,7 @@
 #global bootstrap_arches %%{rust_arches}
 
 %if 1
-%bcond_without bundled_libgit2
+%bcond_with bundled_libgit2
 %else
 %bcond_with bundled_libgit2
 %endif
@@ -105,7 +105,7 @@ BuildRequires:	zlib-devel
 %if %with bundled_libgit2
 Provides:	bundled(libgit2) = 0.24.0
 %else
-BuildRequires:	libgit2-devel >= 0.24
+BuildRequires:	pkgconfig(libgit2) >= 0.24
 %endif
 
 # Cargo is not much use without Rust

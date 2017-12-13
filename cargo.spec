@@ -22,7 +22,7 @@
 %bcond_with llvm
 
 Name:		cargo
-Version:	0.22.0
+Version:	0.23.0
 Release:	1
 Summary:	Rust's package manager and build tool
 Group:		Development/Other
@@ -79,7 +79,7 @@ end}
 # want to link to.  With our -devel buildreqs in place, they'll be used instead.
 # FIXME: These should all eventually be packaged on their own!
 Source100:	%{name}-%{version}-vendor.tar.xz
-
+Patch0:	cargo-0.23.0-disable-mdbook.patch
 BuildRequires:	rust >= 0.20.0
 BuildRequires:	make
 BuildRequires:	cmake
@@ -116,7 +116,6 @@ Requires:	rust
 Cargo is a tool that allows Rust projects to declare their various dependencies
 and ensure that you'll always get a repeatable build.
 
-
 %prep
 %ifarch %{bootstrap_arches}
 %setup -q -n %{bootstrap_root} -T -b %{bootstrap_source}
@@ -128,6 +127,8 @@ test -f '%{local_cargo}'
 
 # vendored crates
 %setup -q -T -D -a 100
+
+%apply_patches
 
 # define the offline registry
 %global cargo_home $PWD/.cargo

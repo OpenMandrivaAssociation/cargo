@@ -22,7 +22,7 @@
 %bcond_with llvm
 
 Name:		cargo
-Version:	0.25.0
+Version:	0.27.0
 Release:	1
 Summary:	Rust's package manager and build tool
 Group:		Development/Other
@@ -74,12 +74,11 @@ end}
 %endif
 
 # Use vendored crate dependencies so we can build offline.
-# Created using https://github.com/alexcrichton/cargo-vendor/ 0.1.11
+# Created using https://github.com/alexcrichton/cargo-vendor/ 0.1.14
 # It's so big because some of the -sys crates include the C library source they
 # want to link to.  With our -devel buildreqs in place, they'll be used instead.
 # FIXME: These should all eventually be packaged on their own!
 Source100:	%{name}-%{version}-vendor.tar.xz
-Patch0:	cargo-0.23.0-disable-mdbook.patch
 BuildRequires:	rust >= 0.20.0
 BuildRequires:	make
 BuildRequires:	cmake
@@ -173,7 +172,6 @@ export CARGO_HOME="%{cargo_home}"
 export RUSTFLAGS="%{rustflags}"
 
 %{local_cargo} build --verbose --release
-sh src/ci/dox.sh
 
 %install
 export CARGO_HOME="%{cargo_home}"

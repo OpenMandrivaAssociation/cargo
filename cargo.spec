@@ -22,7 +22,7 @@
 %bcond_with llvm
 
 Name:		cargo
-Version:	0.27.0
+Version:	0.30.0
 Release:	1
 Summary:	Rust's package manager and build tool
 Group:		Development/Other
@@ -78,6 +78,12 @@ end}
 # It's so big because some of the -sys crates include the C library source they
 # want to link to.  With our -devel buildreqs in place, they'll be used instead.
 # FIXME: These should all eventually be packaged on their own!
+#
+# cargo install cargo-vendor
+# export PATH=~/.cargo/bin:$PATH
+# cd cargo-%{version}
+# cargo vendor
+# tar cJf cargo-%{version}-vendor.tar.xz vendor
 Source100:	%{name}-%{version}-vendor.tar.xz
 BuildRequires:	rust >= 0.20.0
 BuildRequires:	make

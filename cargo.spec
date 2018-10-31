@@ -23,7 +23,7 @@
 
 Name:		cargo
 Version:	0.30.0
-Release:	1
+Release:	2
 Summary:	Rust's package manager and build tool
 Group:		Development/Other
 License:	ASL 2.0 or MIT

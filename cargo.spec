@@ -22,8 +22,8 @@
 %bcond_with llvm
 
 Name:		cargo
-Version:	0.30.0
-Release:	2
+Version:	0.31.0
+Release:	1
 Summary:	Rust's package manager and build tool
 Group:		Development/Other
 License:	ASL 2.0 or MIT

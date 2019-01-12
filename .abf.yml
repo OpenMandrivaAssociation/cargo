@@ -1,3 +1,5 @@
-sources:
+removed_sources:
   cargo-0.30.0.tar.gz: fbe50d5581025457d727e45d6583ace7a50ce89c
-  cargo-0.30.0-vendor.tar.xz: f92220fb43e5d1744e4c6f4c88bbe78d6c67630f
+sources:
+  cargo-0.31.0-vendor.tar.xz: bc3c84770e3f2ddc33476cab84025221d2db59e5
+  cargo-0.31.0.tar.gz: 912f8d8808ceedc3249946297482e3e5dd7a7d7e

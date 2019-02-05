@@ -22,7 +22,7 @@
 %bcond_with llvm
 
 Name:		cargo
-Version:	0.32.0
+Version:	0.33.0
 Release:	1
 Summary:	Rust's package manager and build tool
 Group:		Development/Other
@@ -32,7 +32,7 @@ URL:		https://crates.io/
 %global cargo_version %{version}
 %global cargo_bootstrap 0.20.0
 
-Source0:	https://github.com/rust-lang/%{name}/archive/%{cargo_version}/%{name}-%{cargo_version}.tar.gz
+Source0:	https://github.com/rust-lang/cargo/archive/%{version}.tar.gz
 
 # Get the Rust triple for any arch.
 %{lua: function rust_triple(arch)

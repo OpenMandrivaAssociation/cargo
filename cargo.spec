@@ -183,7 +183,7 @@ export RUSTFLAGS="%{rustflags}"
 export CARGO_HOME="%{cargo_home}"
 export RUSTFLAGS="%{rustflags}"
 
-%{local_cargo} install --root %{buildroot}%{_prefix}
+%{local_cargo} install --path . --root %{buildroot}%{_prefix}
 rm %{buildroot}%{_prefix}/.crates.toml
 
 mkdir -p %{buildroot}%{_mandir}/man1

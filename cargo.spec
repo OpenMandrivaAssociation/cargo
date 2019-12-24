@@ -7,23 +7,23 @@
 
 # Only x86_64 and i686 are Tier 1 platforms at this time.
 # https://forge.rust-lang.org/platform-support.html
-%global rust_arches x86_64 %ix86 armv7hl aarch64
+%global rust_arches x86_64 %ix86 %{armx}
 
 # Only the specified arches will use bootstrap binaries.
 #global bootstrap_arches %%{rust_arches}
 
-%if 1
-%bcond_with bundled_libgit2
-%else
-%bcond_with bundled_libgit2
-%endif
+# libgit2-sys expects to use its bundled library, which is sometimes just a
+# snapshot of libgit2's master branch.  This can mean the FFI declarations
+# won't match our released libgit2.so, e.g. having changed struct fields.
+# So, tread carefully if you toggle this...
+%bcond_without bundled_libgit2
 
 # (tpg) accordig to Rust devs a LLVM-5.0.0 is not yet supported
 %bcond_with llvm
 
 Name:		cargo
 Version:	0.38.0
-Release:	1
+Release:	2
 Summary:	Rust's package manager and build tool
 Group:		Development/Other
 License:	ASL 2.0 or MIT
@@ -32,7 +32,7 @@ URL:		https://crates.io/
 %global cargo_version %{version}
 %global cargo_bootstrap 0.20.0
 
-Source0:	https://github.com/rust-lang/cargo/archive/%{name}-%{version}.tar.gz
+Source0:       https://github.com/rust-lang/cargo/archive/%{name}-%{version}.tar.gz
 
 # Get the Rust triple for any arch.
 %{lua: function rust_triple(arch)
@@ -133,7 +133,7 @@ test -f '%{local_cargo}'
 # vendored crates
 %setup -q -T -D -a 100
 
-%apply_patches
+%autopatch -p1
 
 # define the offline registry
 %global cargo_home $PWD/.cargo
@@ -151,6 +151,20 @@ EOF
 # Enable optimization, debuginfo, and link hardening.
 %global rustflags -Copt-level=3 -Cdebuginfo=2 -Clink-arg=-Wl,-z,relro,-z,now
 
+# Remove other unused vendored libraries
+#rm -rf vendor/curl-sys/curl/
+#rm -rf vendor/jemalloc-sys/jemalloc/
+#rm -rf vendor/libz-sys/src/zlib/
+#rm -rf vendor/lzma-sys/xz-*/
+#rm -rf vendor/openssl-src/openssl/
+
+%if %without bundled_libgit2
+#rm -rf vendor/libgit2-sys/libgit2/
+%endif
+
+%if %without bundled_libssh2
+#rm -rf vendor/libssh2-sys/libssh2/
+%endif
 
 %build
 export CFLAGS="%{optflags}"
